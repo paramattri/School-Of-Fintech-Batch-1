@@ -1,6 +1,6 @@
 package day4Assignment2;
 import java.util.Scanner;
-public class CalculateSalary {
+public class Question1CalculateSalary {
 	
 	public static int calculateSal(int salary, int shifts) {
 		int savings;
