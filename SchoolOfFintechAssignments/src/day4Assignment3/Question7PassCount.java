@@ -1,12 +1,12 @@
-package dayAssignment3;
+package day4Assignment3;
 import java.util.Scanner;
-public class Question1CountOf3Multiples {
+public class Question7PassCount {
 	
-	public static int divisibleBy3(int arr[], int size) {
+	public static int passCount(int arr[], int size) {
 		
 		int count = 0;
-		for(int i = 0; i < size; i++) {
-			if(arr[i] % 3 == 0)
+		for(int i = 1; i < size; i = i + 2) {
+			if(arr[i] >= 70)
 				count++;
 		}
 		
@@ -19,7 +19,7 @@ public class Question1CountOf3Multiples {
 		
 		int n = sc.nextInt();
 		if(n < 0) {
-			System.out.println("Invalid Input");
+			System.out.println("Invalid Array Size");
 			System.exit(0);
 		}
 		
@@ -32,7 +32,7 @@ public class Question1CountOf3Multiples {
 			}
 		}
 		
-		int count = divisibleBy3(arr, n);
+		int count = passCount(arr, n);
 		System.out.println(count);
 
 	}

@@ -1,23 +1,18 @@
-package dayAssignment3;
+package day4Assignment3;
 import java.util.Scanner;
-public class Question2OddEvenAverage {
+public class Question1CountOf3Multiples {
 	
-	public static float avgOddEvenSum(int arr[], int size) {
+	public static int divisibleBy3(int arr[], int size) {
 		
-		int oddSum = 0;
-		int evenSum = 0;
-		
+		int count = 0;
 		for(int i = 0; i < size; i++) {
-			if(arr[i] % 2 == 0) {
-				evenSum += arr[i];
-			}else
-				oddSum += arr[i];
+			if(arr[i] % 3 == 0)
+				count++;
 		}
 		
-		float avg = (float)(evenSum + oddSum) / 2;
-		return avg;
+		return count;
 	}
-	
+
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
@@ -37,9 +32,9 @@ public class Question2OddEvenAverage {
 			}
 		}
 		
-		float avg = avgOddEvenSum(arr,n);
-		System.out.printf("%.2f",avg);
-		
+		int count = divisibleBy3(arr, n);
+		System.out.println(count);
+
 	}
 
 }

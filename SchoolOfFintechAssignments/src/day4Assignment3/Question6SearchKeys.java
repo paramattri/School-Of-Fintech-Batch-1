@@ -1,4 +1,4 @@
-package dayAssignment3;
+package day4Assignment3;
 import java.util.Scanner;
 public class Question6SearchKeys {
 	
