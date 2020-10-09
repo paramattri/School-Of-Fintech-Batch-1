@@ -58,6 +58,7 @@ class BookStore{
 		for(int i = 0; i < counter; i++) {
 			if(books[i].author.equals(author)) {
 				System.out.println("BookId: "+books[i].bookId+"\nTitle: "+books[i].title+"\nAuthor: "+books[i].author+"\nCategory: "+books[i].category+"\nPrice: "+books[i].price);
+				found = true;
 				break;
 			}
 		}
