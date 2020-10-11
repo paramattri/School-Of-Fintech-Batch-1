@@ -193,28 +193,41 @@ class BookStore{
 				case 1:
 					System.out.println("Enter The New Title: ");
 					sc.nextLine();
-					b.get(posFind).title = sc.nextLine();
+					String newTitle = sc.nextLine();
+					Book bNew = new Book(b.get(posFind).bookId, newTitle, b.get(posFind).author, b.get(posFind).category, b.get(posFind).price); 
+					b.set(posFind, bNew);
 					break;
 				case 2:
 					System.out.println("Enter The New Author: ");
 					sc.nextLine();
-					b.get(posFind).author = sc.nextLine();
+					String newAuthor = sc.nextLine();
+					Book bNew1 = new Book(b.get(posFind).bookId, b.get(posFind).title, newAuthor, b.get(posFind).category, b.get(posFind).price);
+					b.set(posFind, bNew1);
 					break;
 				case 3:
 					System.out.println("Enter The New Category: ");
 					sc.nextLine();
-					b.get(posFind).category = sc.nextLine();
+					String newCategory = sc.nextLine();
+					Book bNew2 = new Book(b.get(posFind).bookId, b.get(posFind).title, b.get(posFind).author, newCategory, b.get(posFind).price);
+					b.set(posFind, bNew2);
 					break;
 				case 4:
 					System.out.println("Enter The New Price: ");
-					b.get(posFind).price = sc.nextInt();
+					float newPrice = sc.nextInt();
+					Book bNew3 = new Book(b.get(posFind).bookId, b.get(posFind).title, b.get(posFind).author, b.get(posFind).category, newPrice);
+					b.set(posFind, bNew3);
 					break;
 				case 5:
 					System.out.println("Exiting, Thanks for Updation!!");
 					break;
 				default:
-					System.out.println("Press Valid Key!");
+					System.out.println("Press Valid Key!");	
+				
 				}
+				FileOutputStream fos = new FileOutputStream("BookCollection.ser");
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				oos.writeObject(b);
+				oos.close();
 			}		
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
