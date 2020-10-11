@@ -97,14 +97,14 @@ class Ticket{
 	
 	private StringBuilder generateTicket() {
 		StringBuilder ticket = new StringBuilder();
-		DateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		String travelDateString = formatter.format(travelDate);
 		ticket
-		.append("PNR").append("\t\t\t").append(":").append("\t"+generatePNR())
+		.append("PNR").append("\t\t").append(":").append("\t"+generatePNR())
 		.append("\nTrain No\t:").append("\t"+train.getTrainNo())
 		.append("\nTrain Name\t:").append("\t"+train.getTrainName())
 		.append("\nFrom \t\t:").append("\t"+train.getSource())
-		.append("\nTo \t\t\t:").append("\t"+train.getDestination())
+		.append("\nTo \t\t:").append("\t"+train.getDestination())
 		.append("\nTravel Date\t:").append("\t"+travelDateString)
 		.append("\n\nPassengers :")
 		.append("\nName\t\t\tAge\t\t\tGender\t\t\tFare\n").toString();
