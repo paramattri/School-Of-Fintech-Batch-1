@@ -9,11 +9,17 @@ import org.junit.Test;
 
 public class EvenOddTest {
 	
+	EvenOdd evenOdd;
+	
+	@Before
+	public void setUp() {
+		evenOdd = new EvenOdd();
+	}
 	
 	@Test
 	public void testEven(){
 		
-		String actual = EvenOdd.evenOdd(8);
+		String actual = evenOdd.evenOdd(8);
 		String expected = "even";
 		assertEquals(expected, actual);		
 	}
@@ -21,7 +27,7 @@ public class EvenOddTest {
 	@Test
 	public void testOdd(){
 		
-		String actual = EvenOdd.evenOdd(11);
+		String actual = evenOdd.evenOdd(11);
 		String expected = "odd";
 		assertEquals(expected, actual);		
 	}

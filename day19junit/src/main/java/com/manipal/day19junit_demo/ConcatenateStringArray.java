@@ -2,7 +2,7 @@ package com.manipal.day19junit_demo;
 
 public class ConcatenateStringArray {
 
-	public String[] concatenateArray(String arr1[], String arr2[]) {
+	public String[] concatenateArray(String[] arr1, String[] arr2) {
 		
 		int totalLength = arr1.length + arr2.length;
 		String[] finalArray = new String[totalLength];
