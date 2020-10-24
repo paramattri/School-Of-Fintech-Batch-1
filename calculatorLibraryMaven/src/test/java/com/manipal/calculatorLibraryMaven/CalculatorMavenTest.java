@@ -1,6 +1,9 @@
 package com.manipal.calculatorLibraryMaven;
 
 import org.junit.Test;
+
+import com.manipal.calculatorlibrarymaven.CalculatorMaven;
+
 import junit.framework.TestCase;
 
 public class CalculatorMavenTest extends TestCase {

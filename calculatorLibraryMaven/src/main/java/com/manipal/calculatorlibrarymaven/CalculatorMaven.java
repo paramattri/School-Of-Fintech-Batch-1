@@ -1,4 +1,4 @@
-package com.manipal.calculatorLibraryMaven;
+package com.manipal.calculatorlibrarymaven;
 
 public class CalculatorMaven {
 	

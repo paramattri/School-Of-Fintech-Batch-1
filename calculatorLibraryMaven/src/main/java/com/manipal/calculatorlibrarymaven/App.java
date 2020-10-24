@@ -1,4 +1,4 @@
-package com.manipal.calculatorLibraryMaven;
+package com.manipal.calculatorlibrarymaven;
 
 /**
  * Hello world!
