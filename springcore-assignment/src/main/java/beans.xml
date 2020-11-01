@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+    <bean id="student" class="com.manipal.springcore.bean.Student">
+    	<property name="studentNames">
+    		<list>
+    			<value>Param</value>
+    			<value>Prateek</value>
+    			<value>Piyush</value>
+    			<value>Piyush</value>
+    		</list>
+    	</property>
+    	
+    	<property name="studentRollNo">
+    		<set>
+    			<value>1</value>
+    			<value>2</value>
+    			<value>3</value>
+    			<value>3</value>
+    		</set>
+    	</property>
+    	
+    	<property name="studentDetails">
+    		<map>
+    			<entry key="1" value="Param"/>
+    			<entry key="2" value="Prateek"/>
+    			<entry key="3" value="Piyush"/>
+    			<entry key="3" value="Piyush"/>
+    		</map>
+    	</property>
+    	
+    	<property name="studentDetailsProps">
+    		<props>
+    			<prop key="1">Param</prop>
+    			<prop key="2">Prateek</prop>
+    			<prop key="3">Piyush</prop>
+    			<prop key="3">Piyush</prop>
+    		</props>
+    	</property>
+    </bean>
+
+</beans>
