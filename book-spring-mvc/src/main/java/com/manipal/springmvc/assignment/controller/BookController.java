@@ -14,11 +14,6 @@ public class BookController {
 	
 	private ArrayList<Book> books = new ArrayList<Book>();
 	
-//	@RequestMapping("/")
-//	public String homePage() {
-//		return "home";
-//	}
-	
 	@RequestMapping("/bookForm")
 	public String bookForm() {
 		return "bookForm";
@@ -29,8 +24,7 @@ public class BookController {
 		
 		books.add(book);
 		//model.addAttribute("books", books);
-		return "successBook";
-		
+		return "successBook";	
 	}
 	
 	
