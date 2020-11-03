@@ -1,0 +1,12 @@
+PNR		:	DB_20201015_100
+Train No	:	1002
+Train Name	:	Shatabdi Express
+From 		:	Delhi
+To 		:	Bangalore
+Travel Date	:	15/10/2020
+
+Passengers :
+Name			Age			Gender			Fare
+Mini			30			F			1875
+Param			22			M			2500
+Total Price : 4375.0
