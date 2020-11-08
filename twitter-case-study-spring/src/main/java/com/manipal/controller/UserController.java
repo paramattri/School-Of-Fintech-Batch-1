@@ -23,7 +23,6 @@ public class UserController {
 	@Autowired
 	private LoginService loginService;
 	
-	private String currentUser;
 	
 	@PostMapping("/twitter/register")
 	public String registration(@RequestBody User user) {
@@ -40,14 +39,15 @@ public class UserController {
 		return registrationResponse;
 	}
 	
-//	@GetMapping("/twitter")
-//	public RedirectView hello1(RedirectAttributes redirectAttrs) {
-//		redirectAttrs.addAttribute("userName", "Param");
-//		return new RedirectView("twitter/user/{userName}");
-//	}
-//	
-//	@GetMapping("/twitter/user/{userName}")
-//	public String hello(@PathVariable String userName) {
-//		return "hello "+userName;
-//	}
 }
+
+//@GetMapping("/twitter")
+//public RedirectView hello1(RedirectAttributes redirectAttrs) {
+//	redirectAttrs.addAttribute("userName", "Param");
+//	return new RedirectView("twitter/user/{userName}");
+//}
+//
+//@GetMapping("/twitter/user/{userName}")
+//public String hello(@PathVariable String userName) {
+//	return "hello "+userName;
+//}
