@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +27,7 @@ public class TweetController {
 	
 	@GetMapping("/twitter")
 	public String homePage() {
-		return "Welcome To Twitter Clone!!\nVisit different URLs for some fun. Enjoy!";
+		return "Welcome To Twitter Clone!!\nVisit different URLs for some fun. Enjoy!";	
 	}
 	
 	@PostMapping("/twitter/user/{userName}/tweet")
@@ -48,8 +51,12 @@ public class TweetController {
 	}
 	
 	@GetMapping("/twitter/tweets")
-	public List<Tweet> retrieveAllTweets(){
-			return tweetService.retrieveAllTweets();
+	public CollectionModel<Tweet> retrieveAllTweets(){
+		List<Tweet> tweets = tweetService.retrieveAllTweets();
+		WebMvcLinkBuilder linkBuilder =  linkTo(methodOn(TweetController.class).trendingTweets());
+		CollectionModel<Tweet> collectionModel = CollectionModel.of(tweets);
+		collectionModel.add(linkBuilder.withRel("Trending Tweets"));
+		return collectionModel;
 	}
 	
 	@DeleteMapping("/twitter/user/{userName}/tweets/{tweet}")
