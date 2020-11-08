@@ -22,6 +22,11 @@ public class TweetController {
 	@Autowired
 	private TweetService tweetService;
 	
+	@GetMapping("/twitter")
+	public String homePage() {
+		return "Welcome To Twitter Clone!!\nVisit different URLs for some fun. Enjoy!";
+	}
+	
 	@PostMapping("/twitter/user/{userName}/tweet")
 	public String addTweet(@PathVariable String userName, @RequestBody Tweet tweet) {
 		if(userName.equals(CurrentUserNameUtil.getCurrentUserName())) {
