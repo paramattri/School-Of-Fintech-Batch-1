@@ -77,4 +77,9 @@ public class TweetController {
 		return "Update Tweet After Login";
 	}
 	
+	@GetMapping("/twitter/trending")
+	public List<String> trendingTweets(){
+		return tweetService.trendingTweets();
+	}
+	
 }

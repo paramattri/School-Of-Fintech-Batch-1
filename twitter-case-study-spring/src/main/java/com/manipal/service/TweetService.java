@@ -38,4 +38,8 @@ public class TweetService {
 	public void deleteTweetById(int tweetId) {
 		tweetRepository.deleteById(tweetId);
 	}
+	
+	public List<String> trendingTweets(){
+		return tweetRepository.trendingTweets();
+	}
 }
