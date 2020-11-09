@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.manipal.model.UnitBean;
 
 //@FeignClient(name="unit-conversion-service", url="localhost:8081")
-@FeignClient(name="unit-conversion-service")
+//@FeignClient(name="unit-conversion-service")
+@FeignClient(name = "zuul-api-gateway-server")
 @RibbonClient(name="unit-conversion-service")
 public interface UnitConversionServiceProxy {
 	
-	@GetMapping("unit-conversion/from/{fromUnit}/to/{toUnit}")
+	@GetMapping("unit-conversion-service/unit-conversion/from/{fromUnit}/to/{toUnit}")
 	public UnitBean retrieveConversionMultiple(@PathVariable("fromUnit") String fromUnit, @PathVariable("toUnit") String toUnit);
 }
