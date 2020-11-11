@@ -22,13 +22,11 @@
     			
     			<h2 th:case="null" class="display-6">No Tweets Yet!</h2>
         		<div th:case="*">
-            	<h2 class="display-6">Tweets</h2>
+            	<h2 class="display-6">Tweeted By: @<span th:text="${userName}"></span></h2>
 				<br>
 				<table class="table table-dark">
                 <thead>
                     <tr>
-                        <th scope="col">TweetId</th>
-                        <th scope="col">Username</th>
                         <th scope="col">Tweet</th>
                         <th scope="col">Creation Time</th>
                        	<th scope="col">Actions</th>
@@ -36,8 +34,6 @@
                 </thead>
                 <tbody>
                 <tr th:each="tweet : ${tweets}">
-                    <td th:text="${tweet.tweetId}"></td>
-                    <td th:text="${tweet.userName}"></td>
                     <td th:text="${tweet.tweet}"></td>
                     <td th:text="${tweet.creationTime}"></td>
                     <td><a th:href="@{/twitter/user/{userName}/tweet/{tweetId}(userName=${tweet.userName},tweetId=${tweet.tweetId})}" class="btn btn-warning" role="button">Update</a> <a th:href="@{/twitter/user/{userName}/tweetId/{tweetId}(userName=${tweet.userName},tweetId=${tweet.tweetId})}" class="btn btn-danger" role="button">Delete</a></td>

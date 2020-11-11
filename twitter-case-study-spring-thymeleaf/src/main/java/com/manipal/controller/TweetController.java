@@ -8,6 +8,7 @@ import java.util.TreeMap;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Controller;
@@ -56,9 +57,17 @@ public class TweetController {
 	public String addTweet(@PathVariable String userName, @ModelAttribute("tweetOb") Tweet tweetOb, BindingResult result , RedirectAttributes redirectAttrs) {
 		
 		//System.out.println("---------->"+tweetOb.getTweet());
-		if (result.hasErrors()) {
-            return "add-tweet";
-        }
+		
+		if(tweetOb.getTweet().length() == 0) {
+			System.out.println("------>Error Here");
+			return "add-tweet";
+		}
+			
+		
+//		if (result.hasErrors()) {
+//			System.out.println("------>Error Here");
+//            return "add-tweet";
+//        }
 		
 //		System.out.println(userName);
 //		System.out.println(CurrentUserNameUtil.getCurrentUserName());
@@ -91,10 +100,11 @@ public class TweetController {
 //	}
 	
 	@GetMapping("/twitter/tweets")
-	public String retrieveAllTweets(Model model){
-		List<Tweet> tweets = tweetService.retrieveAllTweets();
+	public String retrieveAllTweets(Model model, @Param("keyword") String keyword){
+		List<Tweet> tweets = tweetService.retrieveAllTweets(keyword);
 		model.addAttribute("tweets", tweets);
 		model.addAttribute("userName",CurrentUserNameUtil.getCurrentUserName());
+		model.addAttribute("keyword", keyword);
 		return "retrieve-all-tweets";
 	}
 	
@@ -130,9 +140,14 @@ public class TweetController {
 	@PostMapping("/twitter/user/{userName}/tweet/{tweetId}")
 	public String updateTweet(@PathVariable String userName, @PathVariable int tweetId, @ModelAttribute("tweetOb") Tweet tweetOb, BindingResult result , RedirectAttributes redirectAttrs) {
 		
-		if (result.hasErrors()) {
-            return "update-tweet";
-        }
+		if(tweetOb.getTweet().length() == 0) {
+			System.out.println("------>Error Here");
+			return "update-tweet";
+		}
+		
+//		if (result.hasErrors()) {
+//            return "update-tweet";
+//        }
 		
 		if(userName.equals(CurrentUserNameUtil.getCurrentUserName())) {
 			Tweet tweet = tweetService.retrieveTweetsByTweetId(tweetId);

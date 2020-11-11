@@ -23,7 +23,7 @@
 				
 				<div class="form-group">
 				<label for="tweet">Tweet</label> 
-				<input type="text" class="form-control" th:field="*{tweet}" id="tweet" placeholder="Write Your Tweet Here">
+				<textarea class="form-control" th:field="*{tweet}" id="tweet" placeholder="Write Your Tweet Here"/>
 				<span th:if="${#fields.hasErrors('tweet')}" th:errors="*{tweet}"></span>
 				</div>
 				

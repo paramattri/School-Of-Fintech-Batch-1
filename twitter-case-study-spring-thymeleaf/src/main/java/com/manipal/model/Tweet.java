@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -21,6 +22,7 @@ public class Tweet {
 	private String userName;
 	
 	@NotBlank(message = "*Cannot Post Empty Tweet")
+	@Size(max=300)
 	private String tweet;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")

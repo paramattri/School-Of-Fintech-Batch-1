@@ -28,7 +28,10 @@ public class TweetService {
 		return tweetRepository.findById(tweetId).orElse(null);
 	}
 	
-	public List<Tweet> retrieveAllTweets() {
+	public List<Tweet> retrieveAllTweets(String keyword) {
+		if(keyword != null)
+			return tweetRepository.search(keyword);
+		
 		return tweetRepository.findAll();
 	}
 

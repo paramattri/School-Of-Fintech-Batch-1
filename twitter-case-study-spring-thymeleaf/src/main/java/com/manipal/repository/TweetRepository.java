@@ -18,5 +18,8 @@ public interface TweetRepository extends JpaRepository<Tweet, Integer>{
 	
 	@Query(value = "SELECT tweet, COUNT(tweet) AS count FROM tweet GROUP BY tweet ORDER BY count DESC", nativeQuery = true)
 	List<String> trendingTweets();
+	
+	@Query("SELECT t FROM Tweet t WHERE t.userName LIKE %?1% OR t.tweet LIKE %?1%")
+	public List<Tweet> search(String keyword);
 
 }
