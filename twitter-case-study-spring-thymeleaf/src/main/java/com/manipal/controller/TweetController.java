@@ -1,7 +1,9 @@
 package com.manipal.controller;
 
 import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import javax.validation.Valid;
 
@@ -43,23 +45,29 @@ public class TweetController {
 	@GetMapping("/twitter/user/{userName}/tweet")
 	public String addTweet(@PathVariable String userName, Model model) {
 		model.addAttribute("userName", userName);
-		model.addAttribute("tweet", new Tweet());
+		Tweet tweet = new Tweet();
+		model.addAttribute("tweetOb", tweet);
 		return "add-tweet";
 	}
 	
+	 //@Valid Tweet tweet
+	
 	@PostMapping("/twitter/user/{userName}/tweet")
-	public String addTweet(@PathVariable String userName, @Valid Tweet tweet, BindingResult result , RedirectAttributes redirectAttrs) {
+	public String addTweet(@PathVariable String userName, @ModelAttribute("tweetOb") Tweet tweetOb, BindingResult result , RedirectAttributes redirectAttrs) {
 		
-		System.out.println("---------->"+tweet.getTweet());
+		//System.out.println("---------->"+tweetOb.getTweet());
 		if (result.hasErrors()) {
             return "add-tweet";
         }
 		
+//		System.out.println(userName);
+//		System.out.println(CurrentUserNameUtil.getCurrentUserName());
+		
 		if(userName.equals(CurrentUserNameUtil.getCurrentUserName())) {
 			//System.out.println("Parammmm");
-			tweet.setUserName(userName);
-			tweet.setCreationTime(LocalDateTime.now());
-			tweetService.addOrUpdateTweet(tweet);
+			tweetOb.setUserName(userName);
+			tweetOb.setCreationTime(LocalDateTime.now());
+			tweetService.addOrUpdateTweet(tweetOb);
 			redirectAttrs.addAttribute("userName", userName);
 			return "redirect:/twitter/user/{userName}";
 			
@@ -69,57 +77,81 @@ public class TweetController {
 	}
 	
 	@GetMapping("/twitter/user/{userName}/tweets")
-	public List<Tweet> retrieveTweetsByUserName(@PathVariable String userName){
-			return tweetService.retrieveTweetsByUserName(userName);
+	public String retrieveTweetsByUserName(@PathVariable String userName, Model model){
+			List<Tweet> tweets = tweetService.retrieveTweetsByUserName(userName);
+			model.addAttribute("tweets", tweets);
+			model.addAttribute("userName",userName);
+			return "RetrieveTweet";
+			//return tweetService.retrieveTweetsByUserName(userName);
 	}
 	
-	@GetMapping("/twitter/user/{userName}/tweetId/{tweetId}")
-	public Tweet retrieveTweetsByTweetId(@PathVariable String userName, @PathVariable int tweetId){
-			return tweetService.retrieveTweetsByTweetId(tweetId);
-	}
+//	@GetMapping("/twitter/user/{userName}/tweetId/{tweetId}")
+//	public Tweet retrieveTweetsByTweetId(@PathVariable String userName, @PathVariable int tweetId){
+//			return tweetService.retrieveTweetsByTweetId(tweetId);
+//	}
 	
 	@GetMapping("/twitter/tweets")
-	public CollectionModel<Tweet> retrieveAllTweets(){
+	public String retrieveAllTweets(Model model){
 		List<Tweet> tweets = tweetService.retrieveAllTweets();
-		WebMvcLinkBuilder linkBuilder =  linkTo(methodOn(TweetController.class).trendingTweets());
-		CollectionModel<Tweet> collectionModel = CollectionModel.of(tweets);
-		collectionModel.add(linkBuilder.withRel("Trending Tweets"));
-		return collectionModel;
+		model.addAttribute("tweets", tweets);
+		model.addAttribute("userName",CurrentUserNameUtil.getCurrentUserName());
+		return "retrieve-all-tweets";
 	}
 	
-	@DeleteMapping("/twitter/user/{userName}/tweets/{tweet}")
-	public String deleteTweetByTweetName(@PathVariable String userName, @PathVariable String tweet) {
-		if(userName.equals(CurrentUserNameUtil.getCurrentUserName())) {
-			tweetService.deleteTweetByTweetName(tweet);
-			return "Tweet: "+tweet+" Successfully Deleted!";
-		}
-		return "Delete Tweet After Login!";
-	}
+//	@DeleteMapping("/twitter/user/{userName}/tweets/{tweet}")
+//	public String deleteTweetByTweetName(@PathVariable String userName, @PathVariable String tweet) {
+//		if(userName.equals(CurrentUserNameUtil.getCurrentUserName())) {
+//			tweetService.deleteTweetByTweetName(tweet);
+//			return "Tweet: "+tweet+" Successfully Deleted!";
+//		}
+//		return "Delete Tweet After Login!";
+//	}
 	
-	@DeleteMapping("/twitter/user/{userName}/tweetId/{tweetId}")
-	public String deleteTweetById(@PathVariable String userName, @PathVariable int tweetId) {
+	@GetMapping("/twitter/user/{userName}/tweetId/{tweetId}")
+	public String deleteTweetById(@PathVariable String userName, @PathVariable int tweetId, RedirectAttributes redirectAttrs) {
+		
+		redirectAttrs.addAttribute("userName", userName);
 		if(userName.equals(CurrentUserNameUtil.getCurrentUserName())) {
 			tweetService.deleteTweetById(tweetId);
-			return "Tweet with TweetId: "+tweetId+" Successfully Deleted!";
+			return "redirect:/twitter/user/{userName}/tweets";
 		}
-		return "Delete Tweet After Login!";
+		return "redirect:/twitter/user/{userName}/tweets";
 	}
 	
-	@PutMapping("/twitter/user/{userName}/tweet/{tweetId}")
-	public String updateTweet(@PathVariable String userName, @PathVariable int tweetId, @RequestBody Tweet tweetDetails) {
+	@GetMapping("/twitter/user/{userName}/tweet/{tweetId}")
+	public String updateTweet(@PathVariable String userName, @PathVariable int tweetId, Model model) {
+		model.addAttribute("userName", userName);
+		model.addAttribute("tweetId", tweetId);
+		Tweet tweet = new Tweet();
+		model.addAttribute("tweetOb", tweet);
+		return "update-tweet";
+	}
+	
+	@PostMapping("/twitter/user/{userName}/tweet/{tweetId}")
+	public String updateTweet(@PathVariable String userName, @PathVariable int tweetId, @ModelAttribute("tweetOb") Tweet tweetOb, BindingResult result , RedirectAttributes redirectAttrs) {
+		
+		if (result.hasErrors()) {
+            return "update-tweet";
+        }
+		
 		if(userName.equals(CurrentUserNameUtil.getCurrentUserName())) {
 			Tweet tweet = tweetService.retrieveTweetsByTweetId(tweetId);
-			tweet.setTweet(tweetDetails.getTweet());
+			tweet.setTweet(tweetOb.getTweet());
 			tweetService.addOrUpdateTweet(tweet);
-			return "Tweet Successfully Updated!";
+			redirectAttrs.addAttribute("userName", userName);
+			return "redirect:/twitter/user/{userName}";
 		}
 		
-		return "Update Tweet After Login";
+		return "update-tweet";
 	}
 	
 	@GetMapping("/twitter/trending")
-	public List<String> trendingTweets(){
-		return tweetService.trendingTweets();
+	public String trendingTweets(Model model){
+		LinkedHashMap<String, String> trendingTweets = tweetService.trendingTweets();
+		model.addAttribute("trendingTweets", trendingTweets);
+		model.addAttribute("userName", CurrentUserNameUtil.getCurrentUserName());
+		return "trending-tweets";
+		//return tweetService.trendingTweets();
 	}
 	
 }

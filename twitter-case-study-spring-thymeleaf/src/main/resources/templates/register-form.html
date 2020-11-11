@@ -17,7 +17,7 @@
 	<div class="container">
 		<div class="jumbotron">
 		
-		<h1 class="display-4">Registration</h1>
+		<h1 class="display-4">Create a new account</h1>
 		<hr class="my-4">
 		<form action="#" th:action="@{/twitter/register}" th:object="${user}" method="post">
 			<div class="form-group">
@@ -50,8 +50,10 @@
 				<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 			</div>
 			
-			<button type="submit" class="btn btn-primary">Register</button>
+			<button type="submit" class="btn btn-primary btn-block">Register</button>
 		</form>
+		<br>
+		<a th:href="@{/twitter/login}" class="btn btn-outline-primary btn-sm" role="button">Log In to Existing Account</a>
 		</div>
 	</div>
 </body>

@@ -11,10 +11,10 @@ import javax.validation.constraints.NotBlank;
 public class Login {
 
 	@Id
-	@NotBlank(message = "UserName is mandatory")
+	@NotBlank(message = "*UserName is mandatory")
 	private String userName;
 	
-	@NotBlank(message = "Password is mandatory")
+	@NotBlank(message = "*Password is mandatory")
 	private String password;
 	
 	public Login() {}

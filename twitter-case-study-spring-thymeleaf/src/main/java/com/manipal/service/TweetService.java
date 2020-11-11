@@ -1,5 +1,7 @@
 package com.manipal.service;
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,13 @@ public class TweetService {
 		tweetRepository.deleteById(tweetId);
 	}
 	
-	public List<String> trendingTweets(){
-		return tweetRepository.trendingTweets();
+	public LinkedHashMap<String, String> trendingTweets(){
+		LinkedHashMap<String, String> trendingTweets = new LinkedHashMap<>();
+		List<String> trends = tweetRepository.trendingTweets();
+		for(String trend : trends) {
+			String[] trendSplit = trend.split(",");
+			trendingTweets.put(trendSplit[0], trendSplit[1]);
+		}
+		return trendingTweets;
 	}
 }

@@ -37,8 +37,12 @@
 				<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 			</div>
 			
-			<button type="submit" class="btn btn-primary">Login</button>
+			<button type="submit" class="btn btn-primary btn-block">Login</button>
 		</form>
+		
+		<br>
+		<br>
+		<span>Don't have an account? <a th:href="@{/twitter/registration}" class="btn btn-outline-primary btn-sm" role="button">Sign up</a></span>
 		</div>
 	</div>
 	

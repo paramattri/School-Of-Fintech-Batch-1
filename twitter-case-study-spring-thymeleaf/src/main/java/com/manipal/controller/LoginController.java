@@ -52,8 +52,19 @@ public class LoginController {
 	
 	@GetMapping("/twitter/user/{userName}")
 	public String userHomePage(@PathVariable String userName, Model model) {
+		
+//		if(userName.equals(CurrentUserNameUtil.getCurrentUserName())) {
+//			model.addAttribute("userName", userName);
+//			return "user-home";
+//		}
+//		return "home";
 		model.addAttribute("userName", userName);
 		return "user-home";
+	}
+	
+	@GetMapping("/twitter/logout")
+	public String logout() {
+		return "logout";
 	}
 	
 }

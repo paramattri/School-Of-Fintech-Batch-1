@@ -39,7 +39,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/twitter/register")
-	public String registration(@Valid User user, BindingResult result, Model model) {
+	public String registration(@Valid User user, BindingResult result, Model model, RedirectAttributes redirectAttrs) {
 		
 		if (result.hasErrors()) {
             return "register-form";
@@ -50,6 +50,7 @@ public class UserController {
 		login.setUserName(user.getUserName());
 		login.setPassword(user.getPassword());
 		loginService.addLoginDetails(login);
-		return "thanks";
+		
+		return "redirect:/twitter/login";
 	}
 }

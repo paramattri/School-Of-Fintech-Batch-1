@@ -20,7 +20,7 @@ public class Tweet {
 	private int tweetId;
 	private String userName;
 	
-	@NotBlank(message = "Cannot Post Empty Tweet")
+	@NotBlank(message = "*Cannot Post Empty Tweet")
 	private String tweet;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")

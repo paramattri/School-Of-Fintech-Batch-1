@@ -11,19 +11,19 @@ import javax.validation.constraints.NotBlank;
 @Table(name="user")
 public class User {
 	
-	@NotBlank(message = "FirstName is mandatory")
+	@NotBlank(message = "*FirstName is mandatory")
 	private String firstName;
 	private String lastName;
 	
 	@Id
-	@NotBlank(message = "UserName is mandatory")
+	@NotBlank(message = "*UserName is mandatory")
 	private String userName;
 	
-	@NotBlank(message = "Password is mandatory")
+	@NotBlank(message = "*Password is mandatory")
 	private String password;
 	
 	@Email(message = "Enter a Valid EmailId!")
-	@NotBlank(message = "Email is mandatory")
+	@NotBlank(message = "*Email is mandatory")
 	private String emailId;
 	
 	public User(){}
