@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Update Tweet</title>
+</head>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+	crossorigin="anonymous"></script>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark sticky-top">
+  <a class="navbar-brand" th:href="@{/twitter/user/{userName}(userName=${userName})}">@<span th:text="${userName}"></span></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-link active" th:href="@{/twitter/user/{userName}/tweet(userName=${userName})}">Tweet</a>
+      <a class="nav-link active" th:href="@{/twitter/user/{userName}/tweets(userName=${userName})}">See Tweets</a>
+      <a class="nav-link active" th:href="@{/twitter/tweets}">See All Tweets</a>
+      <a class="nav-link active" th:href="@{/twitter/trending}">Trending</a>
+    </div>
+  </div>
+</nav>
+
+	<div class="container">
+		<div class="jumbotron">
+		
+			<h3><span th:text="${userName}"/>, You can now update your Tweet!</h3>
+			
+			<form action="#" th:action="@{/twitter/user/{userName}/tweet/{tweetId}(userName=${userName},tweetId=${tweetId})}" th:object="${tweetOb}" method="post">
+				
+				<div class="form-group">
+				<label for="tweet">Tweet</label> 
+				<textarea class="form-control" th:field="*{tweet}" id="tweet" placeholder="Write Your Tweet Here"/>
+				<span th:if="${#fields.hasErrors('tweet')}" th:errors="*{tweet}"></span>
+				</div>
+				
+				<button type="submit" class="btn btn-warning">Update</button>
+				
+			</form>	
+			
+			
+		</div>
+	
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Tweets</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	
+	<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark sticky-top">
+  <a class="navbar-brand" th:href="@{/twitter/user/{userName}(userName=${userName})}">@<span th:text="${userName}"></span></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-link active" th:href="@{/twitter/user/{userName}/tweet(userName=${userName})}">Tweet</a>
+      <a class="nav-link active" th:href="@{/twitter/user/{userName}/tweets(userName=${userName})}">See Tweets</a>
+      <a class="nav-link active" th:href="@{/twitter/tweets}">See All Tweets</a>
+      <a class="nav-link active" th:href="@{/twitter/trending}">Trending</a>
+    </div>
+  </div>
+</nav>
+
+	<div class="container">
+		
+		<div class="jumbotron">
+		
+			<div th:switch="${tweets}">
+    			
+    			<h2 th:case="null" class="display-6">No Tweets Yet!</h2>
+        		<div th:case="*">
+            	<h2 class="display-6">Tweeted By: @<span th:text="${userName}"></span></h2>
+				<br>
+				<table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Tweet</th>
+                        <th scope="col">Creation Time</th>
+                       	<th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="tweet : ${tweets}">
+                    <td th:text="${tweet.tweet}"></td>
+                    <td th:text="${tweet.creationTime}"></td>
+                    <td><a th:href="@{/twitter/user/{userName}/tweet/{tweetId}(userName=${tweet.userName},tweetId=${tweet.tweetId})}" class="btn btn-warning" role="button">Update</a> <a th:href="@{/twitter/user/{userName}/tweetId/{tweetId}(userName=${tweet.userName},tweetId=${tweet.tweetId})}" class="btn btn-danger" role="button">Delete</a></td>
+                </tr>
+            </tbody>
+        	</table>
+			</div>
+			
+			<br>
+			<a th:href="@{/twitter/user/{userName}(userName=${userName})}" class="btn btn-primary btn-lg" role="button">Back</a>
+		</div>
+	
+	</div>
+
+</body>
+</html>
