@@ -9,11 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.manipal.model.Login;
 import com.manipal.service.LoginService;
@@ -42,9 +38,7 @@ public class LoginController {
 		if(isValidated) {
 			CurrentUserNameUtil.setCurrentUserName(login.getUserName());
 			redirectAttrs.addAttribute("userName", CurrentUserNameUtil.getCurrentUserName());
-			//model.addAttribute("userName", CurrentUserNameUtil.getCurrentUserName());
 			return "redirect:/twitter/user/{userName}";
-			//return "Login Successfully! \n\nWelcome "+CurrentUserNameUtil.getCurrentUserName();
 		}
 		else
 			return "login-form";
@@ -52,12 +46,6 @@ public class LoginController {
 	
 	@GetMapping("/twitter/user/{userName}")
 	public String userHomePage(@PathVariable String userName, Model model) {
-		
-//		if(userName.equals(CurrentUserNameUtil.getCurrentUserName())) {
-//			model.addAttribute("userName", userName);
-//			return "user-home";
-//		}
-//		return "home";
 		model.addAttribute("userName", userName);
 		return "user-home";
 	}
@@ -65,6 +53,5 @@ public class LoginController {
 	@GetMapping("/twitter/logout")
 	public String logout() {
 		return "logout";
-	}
-	
+	}	
 }
