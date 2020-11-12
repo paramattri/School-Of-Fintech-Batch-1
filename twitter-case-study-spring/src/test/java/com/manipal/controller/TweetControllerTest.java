@@ -1,6 +1,8 @@
 package com.manipal.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -48,7 +50,9 @@ class TweetControllerTest {
 				.content(objectMapper.writeValueAsString(tweet))
 				.accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk());
+				.andExpect(status().is(400));
+		
+		verify(tweetService, times(0)).addOrUpdateTweet(tweet);
 	}
 
 	@Test
@@ -96,7 +100,7 @@ class TweetControllerTest {
 				.content(objectMapper.writeValueAsString(tweet))
 				.accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk());
+				.andExpect(status().is(400));
 	}
 
 	@Test
