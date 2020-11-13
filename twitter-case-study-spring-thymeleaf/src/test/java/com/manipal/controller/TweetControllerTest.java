@@ -41,18 +41,18 @@ class TweetControllerTest {
 		.andExpect(status().isOk());
 	}
 
-//	@Test
-//	void testAddTweetStringTweetBindingResultRedirectAttributes() throws JsonProcessingException, Exception {
-//		
-//		ObjectMapper objectMapper = new ObjectMapper();
-//		Tweet tweet = new Tweet(1,"Pattri","#Diwali",LocalDateTime.now());
-//		
-//		mvc.perform(post("/twitter/user/Pattri/tweet")
-//				.content(objectMapper.writeValueAsString(tweet))
-//				.accept(MediaType.APPLICATION_JSON)
-//				.contentType(MediaType.APPLICATION_JSON))
-//				.andExpect(status().isOk());
-//	}
+	@Test
+	void testAddTweetStringTweetBindingResultRedirectAttributes() throws JsonProcessingException, Exception {
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		Tweet tweet = new Tweet(1,"Pattri","#Diwali",LocalDateTime.now());
+		
+		mvc.perform(post("/twitter/user/Pattri/tweet")
+				.content(objectMapper.writeValueAsString(tweet))
+				.accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
+	}
 
 	@Test
 	void testRetrieveTweetsByUserName() throws Exception {
