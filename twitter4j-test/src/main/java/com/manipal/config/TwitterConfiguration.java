@@ -17,10 +17,10 @@ public class TwitterConfiguration {
 		
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		cb.setDebugEnabled(true)
-		.setOAuthConsumerKey("0EfKWPDGmiYFVoP5UBtdoeud7")
-		.setOAuthConsumerSecret("j8JKvtnoS3un3hfTPS9v9J7KevKRBAc5S9Onk3cdZD9YacqGc9")
-		.setOAuthAccessToken("1238039225070567426-AUk0VgFZ7PxxDMxuyrlscSUqTOgdhr")
-		.setOAuthAccessTokenSecret("ADlsZWWoUKXTIQynhNRQEbL2nFQw9yxAHRPINqdesQFs8");
+		.setOAuthConsumerKey("")
+		.setOAuthConsumerSecret("")
+		.setOAuthAccessToken("")
+		.setOAuthAccessTokenSecret("");
 		
 		TwitterFactory tf = new TwitterFactory(cb.build());
 		System.out.println("Configgggg Data");
