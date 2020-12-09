@@ -1,0 +1,12 @@
+package com.manipal.selenium;
+
+public class AmazonAutomate {
+
+	public static void main(String[] args) {
+		
+		System.setProperty("webdriver.chrome.driver", "D:\\Work\\School_Of_Fintech\\Selenium\\chromedriver.exe");
+		
+
+	}
+
+}

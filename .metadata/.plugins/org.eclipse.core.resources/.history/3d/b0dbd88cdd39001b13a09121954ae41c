@@ -1,0 +1,12 @@
+package com.manipal.selenium;
+
+public class FirstScript {
+
+	public static void main(String[] args) {
+		
+		//First have to configure the browser on which we have to run the script.
+		
+		System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+	}
+
+}
