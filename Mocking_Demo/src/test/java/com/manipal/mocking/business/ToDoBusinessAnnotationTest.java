@@ -31,16 +31,19 @@ public class ToDoBusinessAnnotationTest {
 	void testGetTodosForSpring() {
 		
 		MockitoAnnotations.initMocks(this);
-		List<String> toDoList = Arrays.asList("Spring Core", "Java", "Spring Boot", "Kotlin"); //dummyList
-		when(toDoService.getTodos()).thenReturn(toDoList);
+		List<String> toDoList = Arrays.asList("Spring Core", "Java", "Spring Boot", "Kotlin");
+		List<String> toDoList2 = Arrays.asList("Spring MVC", "Java", "Python", "Kotlin");//dummyList
+		when(toDoService.getTodos()).thenReturn(toDoList).thenReturn(toDoList2);
 		
-		List<String> finalToDos = toDoBusiness.getTodosForSpring();
+		List<String> finalToDos = toDoBusiness.getTodosForSpring(); //first call
+		List<String> finalToDos2 = toDoBusiness.getTodosForSpring(); //second call
 		
 		assertEquals(2, finalToDos.size());
-		verify(toDoService, times(1)).getTodos();
+		assertEquals(1, finalToDos2.size());
+		verify(toDoService, times(2)).getTodos();
 		verify(toDoService, atLeastOnce()).getTodos();
-		verify(toDoService, atLeast(1)).getTodos();
-		verify(toDoService, atMost(1)).getTodos();
+		verify(toDoService, atLeast(2)).getTodos();
+		verify(toDoService, atMost(2)).getTodos();
 		verify(toDoService, never()).neverUsed();
 	}
 
